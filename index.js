@@ -60,7 +60,16 @@ const Appointments = ({ appts }) => {
     </table>
   )
 }
+const Route = path => {
+  switch (path) {
+    case '/appointments': return App;
+    case '/': return App;
+    default: return () => <div>not found</div>
+  }
+}
+
+const Dest = Route(location.pathname)
 ReactDOM.render(
-  <App />,
+  <Dest />,
   document.getElementById('root'),
 );
