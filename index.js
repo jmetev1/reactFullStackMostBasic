@@ -39,24 +39,26 @@ class App extends React.Component {
 const Appointments = ({ appts }) => {
   return (
     <table>
-      <tr>
-        <th>Patients</th>
-        <th>Time</th>
-        <th>Kind</th>
-      </tr>
-      {appts.sort((a, b) => a - b).map(appt => (
-        <tr key={appt.name}>
-          <td>
-            {appt.name}
-          </td>
-          <td>
-            {appt.time}:00PM
-            </td>
-          <td>
-            {appt.time % 2 === 0 ? 'New Patient' : "Follow-up"}
-          </td>
+      <tbody>
+        <tr>
+          <th>Patients</th>
+          <th>Time</th>
+          <th>Kind</th>
         </tr>
-      ))}
+        {appts.sort((a, b) => a - b).map(appt => (
+          <tr key={appt.name}>
+            <td>
+              {appt.name}
+            </td>
+            <td>
+              {appt.time}:00PM
+            </td>
+            <td>
+              {appt.time % 2 === 0 ? 'New Patient' : "Follow-up"}
+            </td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   )
 }

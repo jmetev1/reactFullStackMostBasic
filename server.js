@@ -1,5 +1,3 @@
-var path = require('path')
-// var reload = require('reload')
 var http = require('http')
 var bodyParser = require('body-parser')
 var app = require('express')()
@@ -35,7 +33,7 @@ var headers = {
 };
 app.set('port', process.env.PORT || 8000)
 app.use(bodyParser.json())
-var publicDir = path.join(__dirname, 'public')
+
 app.get('/phys', function (req, res) {
   res.writeHead(statusCode, headers);
   res.end(JSON.stringify(physicians));
@@ -63,8 +61,3 @@ var server = http.createServer(app)
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))
 })
-// reload(app).then(function (reloadReturned) {
-// }).catch(function (err) {
-//   console.error('Reload could not start, could not start server/sample app', err)
-// })
-
