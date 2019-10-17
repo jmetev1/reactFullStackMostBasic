@@ -15,8 +15,6 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "./node_modules/.bin/supervisor -w server.js -- server.js",
-    "start": "supervisor -k -e html,js,json -i .git/,node_modules/ -- server.js",
-    "front": "servor"
+    "start": "supervisor -k -e html,js,json -i .git/,node_modules/ -- server.js"
   }
 }
