@@ -6,6 +6,7 @@
   "license": "",
   "main": "server.js",
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "body-parser": "1.18.3",
     "express": "4.16.4",
     "express-session": "^1.17.0",
@@ -15,6 +16,12 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "supervisor -k -e html,js,json -i .git/,node_modules/ -- server.js"
+    "start": "supervisor -k -e html,js,json -i .git/,node_modules/ -- server.js",
+    "c": "babel jsx --out-dir public/ --watch --presets @babel/preset-react --plugins @babel/plugin-syntax-dynamic-import"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-react": "^7.6.3"
   }
 }

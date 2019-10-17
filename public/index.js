@@ -1,72 +1,20 @@
-const url = 'http://localhost:8000/';
-class App extends React.Component {
-  componentDidMount() {
-    fetch(`${url}phys`).then((res) => {
-      res.json()
-        .then((data) => this.setState({ docs: data }, this.docClick.bind(this, 1)));
-    });
-  }
+import { React, ReactDOM } from 'https://unpkg.com/es-react';
 
-  docClick(id) {
-    const { docs } = this.state;
-    fetch(`${url}patients/${id}`).then((res) => {
-      res.json().then((data) => this.setState({
-        patients: data,
-        docs: docs.map((doc) => ({
-          ...doc,
-          selected: doc.id === id,
-        })),
-      }));
-    });
-  }
+const Fail = () => React.createElement("div", null, "other");
 
-  render() {
-    const { docs, patients } = this.state || {};
-    return (
-      <div>
-        <div className="wrapper">
-          <div className="App">
-            <div className="left">
-              {docs && docs.map((doc) => (
-                <div key={doc.id} className={doc.selected ? 'selected' : ''}>
-                  <button type="button" onClick={this.docClick.bind(this, doc.id)}>{doc.name}</button>
-                </div>
-              ))}
-            </div>
-            <div className="right">
-              {patients ? <Appointments appts={patients} /> : 'Please click a doctor to see their appointments (and resize the screen to see mobile behavior'}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-const Appointments = ({ appts }) => (
-  <table>
-    <tbody>
-      <tr>
-        <th>Patients</th>
-        <th>Time</th>
-        <th>Kind</th>
-      </tr>
-      {appts.sort((a, b) => a - b).map((appt) => (
-        <tr key={appt.name}>
-          <td>
-            {appt.name}
-          </td>
-          <td>
-            {appt.time}
-            :00PM
-          </td>
-          <td>
-            {appt.time % 2 === 0 ? 'New Patient' : 'Follow-up'}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
-ReactDOM.render(
-  <App />, document.getElementById('root'),
-);
+const Route = {
+  '/': React.lazy(() => import('./App.js')),
+  '*': Fail
+}; // const Current = Route[location.pathname || Route['*']];
+
+const Current = Route[location.pathname] || Route['*'];
+ReactDOM.render(React.createElement(React.Suspense, {
+  fallback: React.createElement("div", null, "joooooooooo")
+}, React.createElement(Current, null)), document.getElementById('root')); // ReactDOM.render(
+//   html`
+//     <${React.Suspense} fallback=${html`<div></div>`}>
+//       <${Route[location.pathname] || Route['*']} />
+//     <//>
+//   `,
+//   document.body,
+// );

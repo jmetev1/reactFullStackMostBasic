@@ -1,3 +1,5 @@
+// can i just add a route that calls  babel on frontend code
+
 const reload = require('reload');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -52,6 +54,13 @@ app.get('/patients/:uid', (req, res) => {
   ));
 });
 
+app.get('/reload/reload.js', (req, res) => {
+  res.sendFile('/Users/jacquesmetevier/lint/reactFullStackMostBasic/node_modules/reload/lib/reload.js');
+});
+
+app.get('/*', (req, res) => {
+  res.sendFile('/Users/jacquesmetevier/lint/reactFullStackMostBasic/public/index.html');
+});
 const server = http.createServer(app);
 
 reload(app).then(() => {
